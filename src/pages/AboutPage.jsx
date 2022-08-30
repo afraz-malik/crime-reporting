@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import SmallHeader from '../components/SmallHeader/SmallHeader'
-import Contact from '../components/Contact/Contact'
 import BecomeFaculty from '../components/BecomeFaculty/BecomeFaculty'
 import Footer from '../components/Footer/Footer'
+import About from '../components/About/ABout'
 
-const ContactPage = () => {
+const AboutPage = () => {
  useEffect(() => {
   window.scrollTo(0, 0)
  }, [])
@@ -12,11 +12,11 @@ const ContactPage = () => {
  return (
   <div>
    <SmallHeader bg='bg2' section={false} />
-   <Contact />
+   <About />
    <BecomeFaculty />
    <Footer />
   </div>
  )
 }
 
-export default ContactPage
+export default AboutPage

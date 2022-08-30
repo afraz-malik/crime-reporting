@@ -1,9 +1,9 @@
 import React from 'react'
 import FooterCss from './Footer.module.scss'
 const Footer = () => {
-  return (
-    <footer className={FooterCss.footer}>
-      <div className={FooterCss.row} id="about">
+ return (
+  <footer className={FooterCss.footer}>
+   {/* <div className={FooterCss.row} id="about">
         <div className={FooterCss.widget_item}>
           <h4>Contact Info</h4>
           <ul className={FooterCss.contact_list}>
@@ -86,42 +86,42 @@ const Footer = () => {
             <p>*We don’t spam</p>
           </form>
         </div>
-      </div>
+      </div> */}
 
-      <div className={FooterCss.bottom}>
-        <div className={FooterCss.warp}>
-          <div className={FooterCss.copyright}>
-            Copyright ©{new Date().getFullYear()}| All rights reserved | This
-            website is made with by &#9825; by &ensp;
-            <a
-              href="#"
-              // href="https://afraz-malik.github.io/"
-              // target="_blank"
-              rel="noreferrer"
-            >
-              Malik Moin
-            </a>
-          </div>
+   <div className={FooterCss.bottom}>
+    <div className={FooterCss.warp}>
+     <div className={FooterCss.copyright}>
+      Copyright ©{new Date().getFullYear()}| All rights reserved | This website
+      is made with by &#9825; by &ensp;
+      <a
+       href='#'
+       // href="https://afraz-malik.github.io/"
+       // target="_blank"
+       rel='noreferrer'
+      >
+       Ali Hamza
+      </a>
+     </div>
 
-          <ul className={FooterCss.menu}>
-            <li>
-              {/* eslint-disable-next-line */}
-              <a>Terms &amp; Conditions</a>
-            </li>
-            <li>
-              {/* eslint-disable-next-line */}
-              <a>Register</a>
-            </li>
+     <ul className={FooterCss.menu}>
+      <li>
+       {/* eslint-disable-next-line */}
+       <a>Terms &amp; Conditions</a>
+      </li>
+      <li>
+       {/* eslint-disable-next-line */}
+       <a>Register</a>
+      </li>
 
-            <li>
-              {/* eslint-disable-next-line */}
-              <a>Privacy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  )
+      <li>
+       {/* eslint-disable-next-line */}
+       <a>Privacy</a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </footer>
+ )
 }
 
 export default Footer

@@ -8,19 +8,19 @@ import Footer from '../components/Footer/Footer'
 import TopFaculty from '../components/TopFaculty/TopFaculty'
 
 const HomePage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-  return (
-    <div>
-      <Header />
-      <Departments />
-      {/* <Search /> */}
-      <TopFaculty />
-      <BecomeFaculty />
-      <Footer />
-    </div>
-  )
+ useEffect(() => {
+  window.scrollTo(0, 0)
+ }, [])
+ return (
+  <div>
+   <Header />
+   <Departments />
+   {/* <Search /> */}
+   {/* <TopFaculty /> */}
+   <BecomeFaculty />
+   <Footer />
+  </div>
+ )
 }
 
 export default HomePage
