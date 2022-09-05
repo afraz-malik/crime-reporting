@@ -51,7 +51,7 @@ const App = () => {
       currentUser ? <Redirect to={`/dashboard`} /> : <RegisterPage />
      }
     />
-    <Route path='/faculty' component={fetching ? Spinner : FacultyPage} />
+    {/* <Route path='/faculty' component={fetching ? Spinner : FacultyPage} /> */}
     <Route
      path='/dashboard'
      render={
@@ -66,6 +66,7 @@ const App = () => {
       // null
      }
     />
+    <Route render={() => <Redirect to={`/`} />} />
    </Switch>
   </div>
  )

@@ -39,7 +39,7 @@ const Header = () => {
      />
      <Link
       to={{
-       pathname: `/faculty`,
+       pathname: `/`,
        university: state.university,
        course: state.course,
       }}
