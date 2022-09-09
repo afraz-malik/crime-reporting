@@ -192,7 +192,7 @@ class Form1 extends React.Component {
             <input type="checkbox" name="sameadr" required />{' '}
             <span>
               I hereby verified the above information is correct and verified as
-              per Terms & Conditions of Faculty Directory of Multi University
+              per Terms & Conditions of CRI System
             </span>
           </label>
           <div className={FormCss.cancel}>

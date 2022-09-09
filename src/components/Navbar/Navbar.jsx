@@ -5,68 +5,68 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutStart } from '../../redux/user/user.action'
 
 const Navbar = () => {
- const currentUser = useSelector((state) => state.userReducer.currentUser)
+  const currentUser = useSelector((state) => state.userReducer.currentUser)
 
- const dispatch = useDispatch()
- const [toggle, settoggle] = useState(false)
- const [profile, setprofile] = useState(false)
+  const dispatch = useDispatch()
+  const [toggle, settoggle] = useState(false)
+  const [profile, setprofile] = useState(false)
 
- const handleToggle = () => {
-  settoggle(!toggle)
- }
+  const handleToggle = () => {
+    settoggle(!toggle)
+  }
 
- return (
-  <nav>
-   <div className={NavbarCss.rightnav}>
-    <Link to='/' style={{ textDecoration: 'none' }}>
-     {/* <img src="images/profile.png" alt="" /> */}
-     <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'left' }}>
-      Crime Reporting & <br />{' '}
-      <span style={{ color: '#d82a4e', fontWeight: 'bold' }}>
-       {' '}
-       Investigation System
-      </span>
-     </h1>
-    </Link>
-    <div className={NavbarCss.switch} onClick={() => handleToggle()}>
-     <i className='fa fa-bars'></i>
-    </div>
-   </div>
-   <div
-    className={NavbarCss.leftnav1}
-    style={toggle ? { display: 'block' } : { display: 'none' }}
-   >
-    <ul>
-     <li>
-      {' '}
-      <Link to='/'>Home </Link>
-     </li>
+  return (
+    <nav>
+      <div className={NavbarCss.rightnav}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          {/* <img src="images/profile.png" alt="" /> */}
+          <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'left' }}>
+            Crime Reporting & <br />{' '}
+            <span style={{ color: '#d82a4e', fontWeight: 'bold' }}>
+              {' '}
+              Investigation System
+            </span>
+          </h1>
+        </Link>
+        <div className={NavbarCss.switch} onClick={() => handleToggle()}>
+          <i className="fa fa-bars"></i>
+        </div>
+      </div>
+      <div
+        className={NavbarCss.leftnav1}
+        style={toggle ? { display: 'block' } : { display: 'none' }}
+      >
+        <ul>
+          <li>
+            {' '}
+            <Link to="/">Home </Link>
+          </li>
 
-     <li>
-      {' '}
-      <Link to='/contact'>Contact-Us</Link>
-     </li>
-     <li>
-      {' '}
-      <Link to='/about'>About-Us </Link>
-     </li>
-     <li>
-      {' '}
-      <Link to='/register'>Become Faculty </Link>
-     </li>
-     {!currentUser ? (
-      <li>
-       <Link to='/login' className={NavbarCss.login}>
-        Login
-       </Link>
-      </li>
-     ) : (
-      <li>
-       <Link to='/dashboard'>Dashboard</Link>
-       <Link to='/login' onClick={() => dispatch(signOutStart())}>
-        Logout
-       </Link>
-       {/* <div className={NavbarCss.dropdown}>
+          <li>
+            {' '}
+            <Link to="/contact">Contact-Us</Link>
+          </li>
+          <li>
+            {' '}
+            <Link to="/about">About-Us </Link>
+          </li>
+          <li>
+            {' '}
+            <Link to="/register">Report Crime </Link>
+          </li>
+          {!currentUser ? (
+            <li>
+              <Link to="/login" className={NavbarCss.login}>
+                Login
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/login" onClick={() => dispatch(signOutStart())}>
+                Logout
+              </Link>
+              {/* <div className={NavbarCss.dropdown}>
                 <div
                   className={NavbarCss.a}
                   onClick={() => dispatch(signOutStart())}
@@ -80,69 +80,72 @@ const Navbar = () => {
                 </Link>
                 <div className={NavbarCss.dropdownContent}></div>
               </div> */}
-      </li>
-     )}
-    </ul>
-   </div>
+            </li>
+          )}
+        </ul>
+      </div>
 
-   <div
-    className={NavbarCss.leftnav}
-    style={toggle ? { display: 'none' } : null}
-   >
-    <ul>
-     <li>
-      {' '}
-      <Link to='/'>Home </Link>
-     </li>
+      <div
+        className={NavbarCss.leftnav}
+        style={toggle ? { display: 'none' } : null}
+      >
+        <ul>
+          <li>
+            {' '}
+            <Link to="/">Home </Link>
+          </li>
 
-     <li>
-      {' '}
-      <Link to='/contact'>Contact-Us</Link>
-     </li>
-     <li>
-      {' '}
-      <Link to='/about'>About-Us </Link>
-     </li>
-     <li>
-      {' '}
-      <Link to='/register'>Become Faculty </Link>
-     </li>
-     {!currentUser ? (
-      <li>
-       <Link to='/login' className={NavbarCss.login}>
-        Login
-       </Link>
-      </li>
-     ) : (
-      <li>
-       <div className={NavbarCss.dropdown}>
-        <div className={NavbarCss.profile}>
-         <img
-          src='images/authors/19.png'
-          alt=''
-          onClick={() => setprofile(!profile)}
-         />
-        </div>
-        <div
-         className={NavbarCss.dropdownContent}
-         style={{ display: profile ? 'block' : 'none' }}
-        >
-         <Link to='/dashboard' className={NavbarCss.a}>
-          {' '}
-          Dashboard
-         </Link>
-         <div className={NavbarCss.a} onClick={() => dispatch(signOutStart())}>
-          {' '}
-          Log out
-         </div>
-        </div>
-       </div>
-      </li>
-     )}
-    </ul>
-   </div>
-  </nav>
- )
+          <li>
+            {' '}
+            <Link to="/contact">Contact-Us</Link>
+          </li>
+          <li>
+            {' '}
+            <Link to="/about">About-Us </Link>
+          </li>
+          <li>
+            {' '}
+            <Link to="/register">Report Crime </Link>
+          </li>
+          {!currentUser ? (
+            <li>
+              <Link to="/login" className={NavbarCss.login}>
+                Login
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <div className={NavbarCss.dropdown}>
+                <div className={NavbarCss.profile}>
+                  <img
+                    src="images/authors/19.png"
+                    alt=""
+                    onClick={() => setprofile(!profile)}
+                  />
+                </div>
+                <div
+                  className={NavbarCss.dropdownContent}
+                  style={{ display: profile ? 'block' : 'none' }}
+                >
+                  <Link to="/dashboard" className={NavbarCss.a}>
+                    {' '}
+                    Dashboard
+                  </Link>
+                  <div
+                    className={NavbarCss.a}
+                    onClick={() => dispatch(signOutStart())}
+                  >
+                    {' '}
+                    Log out
+                  </div>
+                </div>
+              </div>
+            </li>
+          )}
+        </ul>
+      </div>
+    </nav>
+  )
 }
 
 export default Navbar
