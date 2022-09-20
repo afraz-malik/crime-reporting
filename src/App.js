@@ -1,11 +1,6 @@
 import React from 'react'
 import './App.css'
-import {
- // BrowserRouter as Router,
- Switch,
- Route,
- Redirect,
-} from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 // Pages
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
@@ -20,56 +15,56 @@ import { gettingFacultiesStart } from './redux/data/data.actions'
 import { Spinner } from './components/spinner/spinner'
 import AboutPage from './pages/AboutPage'
 const App = () => {
- const dispatch = useDispatch()
- const currentUser = useSelector((state) => state.userReducer.currentUser)
- const fetching = useSelector((state) => state.dataReducer.fetching)
- React.useEffect(() => {
-  dispatch(isUserAuthenticated())
-  // eslint-disable-next-line
-  dispatch(gettingFacultiesStart())
-  // eslint-disable-next-line
- }, [])
- return (
-  <div className='App'>
-   {/* <button onClick={() => dispatch(isUserAuthenticated())}>Hello</button> */}
-   <ScrollTop />
-   <Switch>
-    <Route exact path='/' component={!fetching ? HomePage : Spinner} />
-    <Route exact path='/contact' component={ContactPage} />
-    <Route exact path='/about' component={AboutPage} />
-    <Route
-     exact
-     path='/login'
-     render={() =>
-      currentUser ? <Redirect to={`/dashboard`} /> : <LoginPage />
-     }
-    />
-    <Route
-     exact
-     path='/register'
-     render={() =>
-      currentUser ? <Redirect to={`/dashboard`} /> : <RegisterPage />
-     }
-    />
-    {/* <Route path='/faculty' component={fetching ? Spinner : FacultyPage} /> */}
-    <Route
-     path='/dashboard'
-     render={
-      () =>
-       !currentUser ? (
-        <Redirect to={`/login`} />
-       ) : fetching ? (
-        <Spinner />
-       ) : (
-        <Dashboard user={currentUser} />
-       )
-      // null
-     }
-    />
-    <Route render={() => <Redirect to={`/`} />} />
-   </Switch>
-  </div>
- )
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.userReducer.currentUser)
+  const fetching = useSelector((state) => state.dataReducer.fetching)
+  React.useEffect(() => {
+    dispatch(isUserAuthenticated())
+    // eslint-disable-next-line
+    dispatch(gettingFacultiesStart())
+    // eslint-disable-next-line
+  }, [])
+  return (
+    <div className="App">
+      {/* <button onClick={() => dispatch(isUserAuthenticated())}>Hello</button> */}
+      <ScrollTop />
+      <Switch>
+        <Route exact path="/" component={!fetching ? HomePage : Spinner} />
+        <Route exact path="/contact" component={ContactPage} />
+        <Route exact path="/about" component={AboutPage} />
+        <Route
+          exact
+          path="/login"
+          render={() =>
+            currentUser ? <Redirect to={`/dashboard`} /> : <LoginPage />
+          }
+        />
+        <Route
+          exact
+          path="/register"
+          render={() =>
+            currentUser ? <Redirect to={`/dashboard`} /> : <RegisterPage />
+          }
+        />
+        {/* <Route path='/faculty' component={fetching ? Spinner : FacultyPage} /> */}
+        <Route
+          path="/dashboard"
+          render={
+            () =>
+              !currentUser ? (
+                <Redirect to={`/login`} />
+              ) : fetching ? (
+                <Spinner />
+              ) : (
+                <Dashboard user={currentUser} />
+              )
+            // null
+          }
+        />
+        <Route render={() => <Redirect to={`/`} />} />
+      </Switch>
+    </div>
+  )
 }
 
 export default App
