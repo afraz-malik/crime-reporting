@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css'
 import { Switch, Route, Redirect } from 'react-router-dom'
-// Pages
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
 import LoginPage from './pages/LoginPage'
