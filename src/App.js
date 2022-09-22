@@ -47,16 +47,14 @@ const App = () => {
         {/* <Route path='/faculty' component={fetching ? Spinner : FacultyPage} /> */}
         <Route
           path="/dashboard"
-          render={
-            () =>
-              !currentUser ? (
-                <Redirect to={`/login`} />
-              ) : fetching ? (
-                <Spinner />
-              ) : (
-                <Dashboard user={currentUser} />
-              )
-            // null
+          render={() =>
+            !currentUser ? (
+              <Redirect to={`/login`} />
+            ) : fetching ? (
+              <Spinner />
+            ) : (
+              <Dashboard user={currentUser} />
+            )
           }
         />
         <Route render={() => <Redirect to={`/`} />} />
