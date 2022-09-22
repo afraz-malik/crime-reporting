@@ -25,7 +25,6 @@ const App = () => {
   }, [])
   return (
     <div className="App">
-      {/* <button onClick={() => dispatch(isUserAuthenticated())}>Hello</button> */}
       <ScrollTop />
       <Switch>
         <Route exact path="/" component={!fetching ? HomePage : Spinner} />
