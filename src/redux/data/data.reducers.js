@@ -4,6 +4,7 @@ const initialState = {
   faculties: [],
   fetching: false,
   success: false,
+  users: [],
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -21,6 +22,8 @@ export const dataReducer = (state = initialState, action) => {
       return { ...state, sending: false }
     case 'COMMING_MESSAGES':
       return { ...state, messages: action.payload }
+    case 'FUCH_HELL_LKSDF_SDFSDF':
+      return { ...state, users: action.payload }
     case 'ADD_FACULTY':
       return { ...state, sending: true }
     case 'ADD_FACULTY_SUCCESS':

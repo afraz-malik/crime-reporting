@@ -18,6 +18,10 @@ export const facultySelectorList = createSelector(
   [dataSelector],
   (dataReducer) => dataReducer.faculties
 )
+export const UsersSelector = createSelector(
+  [dataSelector],
+  (dataReducer) => dataReducer.users
+)
 export const facultySelectorByParam = (urlParams) =>
   createSelector([facultySelectorList], (faculties) => {
     return faculties.filter((faculty) => {

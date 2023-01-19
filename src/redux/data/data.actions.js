@@ -38,9 +38,24 @@ export const gettingFacultiesStart = () => {
     type: 'GETTING_FACULTY_START',
   }
 }
+
 export const gettingFacultiesSuccess = (payload) => {
   return {
     type: 'GETTING_FACULTY_SUCCESS',
+    payload,
+  }
+}
+
+export const gettingUsersStart = () => {
+  console.log('hello')
+  return {
+    type: 'FUCH_HELL_LKSDF',
+  }
+}
+
+export const gettingUsersSuccess = (payload) => {
+  return {
+    type: 'FUCH_HELL_LKSDF_SDFSDF',
     payload,
   }
 }

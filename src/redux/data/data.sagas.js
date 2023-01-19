@@ -1,82 +1,97 @@
 import { takeLatest, put } from 'redux-saga/effects'
 import {
- addFacultyInDb,
- deleteDbFaculty,
- deleteDbMessage,
- gettingFacultiesFromDb,
- sendMessageInDb,
+  addFacultyInDb,
+  deleteDbFaculty,
+  deleteDbMessage,
+  gettingFacultiesFromDb,
+  gettingUsersFromDb,
+  sendMessageInDb,
 } from '../../firebase/firebase.config'
 import { gettingUsers } from '../user/users.sagas'
 import {
- sendMessageSuccess,
- sendMessageFailed,
- addFacultySuccess,
- gettingFacultiesSuccess,
- addFacultyFailed,
+  sendMessageSuccess,
+  sendMessageFailed,
+  addFacultySuccess,
+  gettingFacultiesSuccess,
+  addFacultyFailed,
+  gettingUsersSuccess,
 } from './data.actions'
 
 export function* gettingFaculties() {
- try {
-  const faculty = yield gettingFacultiesFromDb()
-  yield put(gettingFacultiesSuccess(faculty))
- } catch (e) {
-  alert(e.message)
- }
+  try {
+    const faculty = yield gettingFacultiesFromDb()
+    yield put(gettingFacultiesSuccess(faculty))
+  } catch (e) {
+    alert(e.message)
+  }
 }
 export function* gettingFacultiesStart() {
- yield takeLatest('GETTING_FACULTY_START', gettingFaculties)
+  yield takeLatest('GETTING_FACULTY_START', gettingFaculties)
+}
+export function* gettingUsersSaga() {
+  try {
+    console.log('here')
+    const users = yield gettingUsersFromDb()
+    console.log(users)
+    yield put(gettingUsersSuccess(users))
+  } catch (e) {
+    alert(e.message)
+  }
+}
+export function* gettingUsersStart12345() {
+  yield takeLatest('FUCH_HELL_LKSDF', gettingUsersSaga)
 }
 export function* sendingMessage({ payload }) {
- try {
-  yield sendMessageInDb(payload)
-  yield put(sendMessageSuccess())
-  alert('Message send successfully, We will contact you soon!')
- } catch (e) {
-  alert(e.message)
-  yield put(sendMessageFailed())
- }
+  try {
+    yield sendMessageInDb(payload)
+    yield put(sendMessageSuccess())
+    alert('Message send successfully, We will contact you soon!')
+  } catch (e) {
+    alert(e.message)
+    yield put(sendMessageFailed())
+  }
 }
 
 export function* sendingMessageStart() {
- yield takeLatest('SEND_MESSAGE_START', sendingMessage)
+  yield takeLatest('SEND_MESSAGE_START', sendingMessage)
 }
 
 export function* deleteMessage({ payload }) {
- try {
-  yield deleteDbMessage(payload)
-  yield alert('Deleted')
-  yield gettingUsers()
- } catch (e) {
-  alert(e.message)
- }
+  try {
+    yield deleteDbMessage(payload)
+    yield alert('Deleted')
+    yield gettingUsers()
+  } catch (e) {
+    alert(e.message)
+  }
 }
 export function* deleteMessageStart() {
- yield takeLatest('DELETE_MESSAGE_START', deleteMessage)
+  yield takeLatest('DELETE_MESSAGE_START', deleteMessage)
 }
 export function* deleteFaculty({ payload }) {
- try {
-  yield deleteDbFaculty(payload)
-  yield alert('Deleted')
-  yield gettingFaculties()
- } catch (e) {
-  alert(e.message)
- }
+  try {
+    yield deleteDbFaculty(payload)
+    yield alert('Deleted')
+    yield gettingFaculties()
+  } catch (e) {
+    alert(e.message)
+  }
 }
 export function* deleteFacultyStart() {
- yield takeLatest('DELETE_FACULTY_START', deleteFaculty)
+  yield takeLatest('DELETE_FACULTY_START', deleteFaculty)
 }
 export function* addFaculty({ payload }) {
- try {
-  yield addFacultyInDb(payload)
-  yield put(addFacultySuccess())
-  yield alert('Record Updated Successfully')
-  yield gettingFaculties()
- } catch (er) {
-  alert(er.message)
-  yield put(addFacultyFailed(er.message))
- }
+  try {
+    yield addFacultyInDb(payload)
+    yield put(addFacultySuccess())
+    yield alert('Record Updated Successfully')
+    yield gettingFaculties()
+  } catch (er) {
+    alert(er.message)
+    yield put(addFacultyFailed(er.message))
+  }
 }
 
 export function* addFacultyStart() {
- yield takeLatest('ADD_FACULTY', addFaculty)
+  yield takeLatest('ADD_FACULTY', addFaculty)
 }

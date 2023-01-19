@@ -3,6 +3,7 @@ import { Link, Route, withRouter } from 'react-router-dom'
 import AdminDashboardCss from './AdminDashboard.module.scss'
 import DashboardProfile from '../DashboardProfile/DashboardProfile'
 import DataBox from '../DataBox/DataBox'
+import UsersBox from '../Users/DataBox'
 import FacultyRequests from '../FacultyRequests/FacultyRequests'
 import ReceivedMessages from '../ReceivedMessages/ReceivedMessages'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +21,8 @@ const AdminDashboard = ({ match }) => {
   let manage = false
   let addReports = false
   let messages = false
+  let reporters = false
+  let iofficers = false
 
   if (window.location.href.indexOf('manage-faculty') > -1) {
     manage = true
@@ -27,6 +30,10 @@ const AdminDashboard = ({ match }) => {
     addReports = true
   } else if (window.location.href.indexOf('messages') > -1) {
     messages = true
+  } else if (window.location.href.indexOf('reporters') > -1) {
+    reporters = true
+  } else if (window.location.href.indexOf('investigation-officers') > -1) {
+    iofficers = true
   } else if (window.location.href.indexOf('dashboard') > -1) {
     profile = true
   }
@@ -81,6 +88,40 @@ const AdminDashboard = ({ match }) => {
               Reported Crimes
             </Link>
           </li>
+          {currentUser.type === 'sofficer' && (
+            <>
+              <li>
+                <Link
+                  to={`${match.path}/reporters`}
+                  style={
+                    reporters
+                      ? {
+                          color: '#d82a4e',
+                          borderBottom: '5px solid #d82a4e',
+                        }
+                      : null
+                  }
+                >
+                  Reporters
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={`${match.path}/investigation-officers`}
+                  style={
+                    iofficers
+                      ? {
+                          color: '#d82a4e',
+                          borderBottom: '5px solid #d82a4e',
+                        }
+                      : null
+                  }
+                >
+                  Investigation Officers
+                </Link>
+              </li>
+            </>
+          )}
           {/* <li>
       <Link
        to={`${match.path}/received-messages`}
@@ -100,6 +141,12 @@ const AdminDashboard = ({ match }) => {
       </nav>
       <Route exact path={`${match.path}`} component={DashboardProfile} />
       <Route exact path={`${match.path}/manage-faculty`} component={DataBox} />
+      <Route exact path={`${match.path}/reporters`} component={UsersBox} />
+      <Route
+        exact
+        path={`${match.path}/investigation-officers`}
+        component={UsersBox}
+      />
       <Route exact path={`${match.path}/add-report`} component={Form3} />
       <Route
         exact

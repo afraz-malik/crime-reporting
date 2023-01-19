@@ -17,10 +17,12 @@ import {
   gettingFacultiesStart,
   addFacultyStart,
   deleteFacultyStart,
+  gettingUsersStart12345,
 } from './data/data.sagas'
 
 export default function* rootSaga() {
   yield all([
+    call(gettingUsersStart12345),
     call(settingUserPersistenceStart),
     call(signInWithGoogleStart),
     call(signInWithEmailStart),
