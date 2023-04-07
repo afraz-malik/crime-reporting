@@ -5,6 +5,7 @@ import TextField from '../TextField/TextField'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFaculty } from '../../redux/data/data.actions.js'
+import moment from 'moment/moment.js'
 const initialState = {
   type: '',
   date: '',
@@ -112,6 +113,7 @@ const Form1 = ({ submitForm, collectData }) => {
               <i className="fal fa-map-marker-smile"></i> Date
             </label>
             <TextField
+              max={moment().format('YYYY-MM-DD')}
               error={errors.date}
               type="date"
               id="date"
@@ -125,7 +127,8 @@ const Form1 = ({ submitForm, collectData }) => {
               <i className="far fa-building"></i> Time
             </label>
             <TextField
-              error={errors.time}
+              max={new Date(state.date).getHours()}
+              // max={'}
               type="time"
               id="time"
               name="time"

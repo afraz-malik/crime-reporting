@@ -126,6 +126,15 @@ export const fetchingMessages = async () => {
   })
   return messsages
 }
+export const fetchingCampaigns = async () => {
+  const dataRef = await getDocs(collection(db, 'campaigns'))
+  let messsages = []
+  dataRef.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    messsages.push(doc.data())
+  })
+  return messsages
+}
 export const approveDbUser = async ({ payload }) => {
   const userRef = await doc(db, 'users', `${payload.id}`)
   if (payload.manage) {
@@ -135,6 +144,32 @@ export const approveDbUser = async ({ payload }) => {
   } else {
     await deleteDoc(doc(db, 'users', `${payload.id}`))
   }
+}
+export const updateIO = async (payload) => {
+  const userRef = await doc(db, 'crimes', `${payload.id}`)
+  await updateDoc(userRef, {
+    io: payload.io,
+  })
+}
+export const updateProgress = async (payload) => {
+  console.log(payload)
+  const userRef = await doc(db, 'crimes', `${payload.id}`)
+  await updateDoc(userRef, {
+    progress: payload.progress,
+  })
+}
+export const createNews = async (payload) => {
+  console.log(payload)
+  const userRef = await doc(db, 'crimes', `${payload.id}`)
+  await updateDoc(userRef, {
+    news: true,
+  })
+}
+export const createCampaigns = async (payload) => {
+  // doc.data() will be undefined in this case
+  const rand = Math.floor(Math.random() * 2.5 * 10)
+  const docRef = doc(db, 'campaigns', `${rand}`)
+  return await setDoc(docRef, { id: rand, ...payload })
 }
 export const passwordForget = async ({ payload }) => {
   sendPasswordResetEmail(auth, payload)
@@ -207,8 +242,9 @@ export const addFacultyInDb = async (payload) => {
   //   }
   // } else {
   // }
-  const docRef = doc(db, 'faculty', `${Date.now()}`)
-  await setDoc(docRef, { ...payload, images: null })
+  let id = Date.now()
+  const docRef = doc(db, 'crimes', `${id}`)
+  await setDoc(docRef, { ...payload, id, images: null })
   if (!Array.isArray(payload.images)) {
     const storageRef = ref(storage, `${payload.images.name}`)
     uploadBytes(storageRef, payload.images).then((snapshot) => {
@@ -223,7 +259,7 @@ export const addFacultyInDb = async (payload) => {
   }
 }
 export const gettingFacultiesFromDb = async () => {
-  const dataRef = await getDocs(collection(db, 'faculty'))
+  const dataRef = await getDocs(collection(db, 'crimes'))
   let faculty = []
   dataRef.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots

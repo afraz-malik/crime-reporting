@@ -9,6 +9,7 @@ import ReceivedMessages from '../ReceivedMessages/ReceivedMessages'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsersStart } from '../../redux/user/user.action'
 import Form3 from '../AddReports/Form3'
+import AddCampaigns from './AddCampaigns.jsx'
 const AdminDashboard = ({ match }) => {
   const dispatch = useDispatch()
   React.useEffect(() => {
@@ -23,8 +24,8 @@ const AdminDashboard = ({ match }) => {
   let messages = false
   let reporters = false
   let iofficers = false
-
-  if (window.location.href.indexOf('manage-faculty') > -1) {
+  let campaigns = false
+  if (window.location.href.indexOf('reported-crimes') > -1) {
     manage = true
   } else if (window.location.href.indexOf('add-report') > -1) {
     addReports = true
@@ -34,11 +35,21 @@ const AdminDashboard = ({ match }) => {
     reporters = true
   } else if (window.location.href.indexOf('investigation-officers') > -1) {
     iofficers = true
+  } else if (window.location.href.indexOf('campaigns') > -1) {
+    campaigns = true
   } else if (window.location.href.indexOf('dashboard') > -1) {
     profile = true
   }
   return (
     <div className={AdminDashboardCss.container}>
+      <h1>
+        Welcome :{' '}
+        {currentUser.type === 'officer'
+          ? 'Investigation Officer'
+          : currentUser.type === 'sofficer'
+          ? 'Senior Officer'
+          : 'Reporter'}
+      </h1>
       <nav>
         <ul>
           <li>
@@ -75,7 +86,7 @@ const AdminDashboard = ({ match }) => {
           )}
           <li>
             <Link
-              to={`${match.path}/manage-faculty`}
+              to={`${match.path}/reported-crimes`}
               style={
                 manage
                   ? {
@@ -120,6 +131,21 @@ const AdminDashboard = ({ match }) => {
                   Investigation Officers
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={`${match.path}/campaigns`}
+                  style={
+                    campaigns
+                      ? {
+                          color: '#d82a4e',
+                          borderBottom: '5px solid #d82a4e',
+                        }
+                      : null
+                  }
+                >
+                  Add Campaigns
+                </Link>
+              </li>
             </>
           )}
           {/* <li>
@@ -140,8 +166,9 @@ const AdminDashboard = ({ match }) => {
         </ul>
       </nav>
       <Route exact path={`${match.path}`} component={DashboardProfile} />
-      <Route exact path={`${match.path}/manage-faculty`} component={DataBox} />
+      <Route exact path={`${match.path}/reported-crimes`} component={DataBox} />
       <Route exact path={`${match.path}/reporters`} component={UsersBox} />
+      <Route exact path={`${match.path}/campaigns`} component={AddCampaigns} />
       <Route
         exact
         path={`${match.path}/investigation-officers`}

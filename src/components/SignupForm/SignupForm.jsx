@@ -9,8 +9,14 @@ import TextField from '../TextField/TextField'
 import * as yup from 'yup'
 const userValidator = yup.object().shape({
   name: yup.string().required('Name is required'),
-  address: yup.string().required('Address is required'),
-  phone: yup.string().required('Phone is required'),
+  address: yup
+    .string()
+    .min(10, 'Address must be 10 characters long')
+    .required('Address is required'),
+  phone: yup
+    .number()
+    .typeError('Phone must be numbers')
+    .required('Phone is required'),
   type: yup.string().required('Please select role in  order to continue'),
   email: yup
     .string()
@@ -23,8 +29,14 @@ const userValidator = yup.object().shape({
 })
 const sOfficerValidator = yup.object().shape({
   name: yup.string().required('Name is required'),
-  address: yup.string().required('Address is required'),
-  phone: yup.string().required('Phone is required'),
+  address: yup
+    .string()
+    .min(10, 'Address must be 10 characters long')
+    .required('Address is required'),
+  phone: yup
+    .number()
+    .typeError('Phone must be numbers')
+    .required('Phone is required'),
   type: yup.string().required('Please select role in  order to continue'),
   rank: yup.string().required('Rank is required'),
   department: yup.string().required('Department is required'),
@@ -69,7 +81,13 @@ const SignupForm = () => {
         setErrors({ ...errors, cpassword: 'Confirm Password does not matched' })
         return
       }
+      if (state.name && !/^[a-zA-Z]/.test(state.name)) {
+        setErrors({ ...errors, name: 'Name must start with alphabets' })
+
+        return
+      }
       dispatch(signUp(state))
+
     } catch (error) {
       console.log(error)
       if (error.name === 'ValidationError') {
@@ -81,7 +99,7 @@ const SignupForm = () => {
       }
     }
   }
-
+console.log(errors);
   return (
     <div className={SignupCss.container}>
       <form onSubmit={handleSubmit}>

@@ -105,7 +105,7 @@ class UsersBox extends React.Component {
             <img alt="" src="images/search2.svg" />
             <input
               type="text"
-              placeholder="Search for name, university, email..."
+              placeholder="Search......"
               onChange={this.handleChange}
               value={searchValue}
             />

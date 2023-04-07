@@ -13,6 +13,7 @@ import { isUserAuthenticated } from './redux/user/user.action'
 import { gettingFacultiesStart } from './redux/data/data.actions'
 import { Spinner } from './components/spinner/spinner'
 import AboutPage from './pages/AboutPage'
+import Campaigns, { SingleCampaign } from './Campaigns.jsx'
 const App = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.userReducer.currentUser)
@@ -30,6 +31,8 @@ const App = () => {
         <Route exact path="/" component={!fetching ? HomePage : Spinner} />
         <Route exact path="/contact" component={ContactPage} />
         <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/campaigns" component={Campaigns} />
+        <Route exact path="/campaigns/:id" component={SingleCampaign} />
         <Route
           exact
           path="/login"
@@ -44,7 +47,7 @@ const App = () => {
             currentUser ? <Redirect to={`/dashboard`} /> : <RegisterPage />
           }
         />
-        {/* <Route path='/faculty' component={fetching ? Spinner : FacultyPage} /> */}
+        <Route path="/news" component={fetching ? Spinner : FacultyPage} />
         <Route
           path="/dashboard"
           render={() =>

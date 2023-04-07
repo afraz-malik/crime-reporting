@@ -16,7 +16,10 @@ export const Success = createSelector(
 )
 export const facultySelectorList = createSelector(
   [dataSelector],
-  (dataReducer) => dataReducer.faculties
+  (dataReducer) => {
+    console.log(dataReducer)
+    return dataReducer.faculties
+  }
 )
 export const UsersSelector = createSelector(
   [dataSelector],
@@ -24,10 +27,10 @@ export const UsersSelector = createSelector(
 )
 export const facultySelectorByParam = (urlParams) =>
   createSelector([facultySelectorList], (faculties) => {
+    console.log(urlParams)
+
     return faculties.filter((faculty) => {
-      return faculty.personal.fm_name
-        .toLowerCase()
-        .includes(urlParams.toLowerCase())
+      return faculty.id === urlParams
     })
   })
 
@@ -44,33 +47,35 @@ const universities = []
 export const getUniversities = createSelector(
   [facultySelectorList],
   (faculties) => {
-    faculties.map((faculty) => universities.push(faculty.faculty.fm_university))
-    return universities
+    // faculties.map((faculty) =>
+    //   universities.push(faculty.faculty?.fm_university)
+    // )
+    return faculties
   }
 )
 const departments = []
 export const getDepartments = createSelector(
   [facultySelectorList],
   (faculties) => {
-    faculties.map((faculty) => departments.push(faculty.faculty.fm_department))
-    return departments
+    // faculties.map((faculty) => departments.push(faculty.faculty.fm_department))
+    return faculties
   }
 )
 
 var courses = []
 export const getCourses = createSelector([facultySelectorList], (faculties) => {
-  faculties.map(
-    (faculty) => (courses = [...courses, ...faculty.faculty.fm_courses])
-  )
-  return courses
+  // faculties.map(
+  // (faculty) => (courses = [...courses, ...faculty.faculty.fm_courses])
+  // )
+  return faculties
 })
 var experties = []
 export const getExperties = createSelector(
   [facultySelectorList],
   (faculties) => {
-    faculties.map(
-      (faculty) => (experties = [...experties, ...faculty.faculty.fm_experties])
-    )
-    return experties
+    // faculties.map(
+    //   (faculty) => (experties = [...experties, ...faculty.faculty.fm_experties])
+    // )
+    return faculties
   }
 )

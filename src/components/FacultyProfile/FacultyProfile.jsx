@@ -22,22 +22,15 @@ const FacultyProfile = ({ history, facultySelector }) => {
   }
   React.useEffect(() => {
     if (facultySelector.length > 0) {
-      history.push(`/faculty/${facultySelector[0].personal.fm_name}`)
+      // history.push(`/faculty/${facultySelector[0].personal?.fm_name}`)
       const { personal, qualification, faculty } = facultySelector[0]
       setF({
-        name: personal.fm_name,
-        department: faculty.fm_department,
-        designation: faculty.fm_designation,
-        city: faculty.fm_city,
-        country: faculty.fm_country,
-        phone: personal.fm_phone,
-        email: personal.fm_email,
-        university: faculty.fm_university,
-        image: personal.imgurl,
+        name: personal?.fm_name,
+        phone: personal?.fm_phone,
+        email: personal?.fm_email,
+        image: personal?.imgurl,
         qualification: qualification,
-        courses: faculty.fm_courses,
-        experties: faculty.fm_experties,
-        interests: faculty.fm_interests,
+        ...facultySelector[0],
       })
     }
     // eslint-disable-next-line
@@ -57,7 +50,7 @@ const FacultyProfile = ({ history, facultySelector }) => {
     qualification: [],
     interests: '',
   })
-
+  console.log(facultySelector)
   function myFunction() {
     if (window.pageYOffset >= 300) {
       setstate(true)
@@ -79,7 +72,7 @@ const FacultyProfile = ({ history, facultySelector }) => {
             : { position: 'unset', boxShadow: 'unset' }
         }
       >
-        {f.name}
+        {'News'}
       </div>
 
       <div
@@ -88,13 +81,18 @@ const FacultyProfile = ({ history, facultySelector }) => {
       >
         <div className={FacultyProfileCss.left}>
           <div className={FacultyProfileCss.img}>
-            <img src={f.image} alt="" />
+            <img
+              src={
+                'https://static.vecteezy.com/system/resources/thumbnails/004/216/831/original/3d-world-news-background-loop-free-video.jpg'
+              }
+              alt=""
+            />
           </div>
           <div className={FacultyProfileCss.info}>
-            <h3>CONTACT INFO</h3>
+            <h3>REPORTER INFO</h3>
             <hr className={FacultyProfileCss.hr} />
-            <p>Dept. {f.department},</p>
-            <p> {f.university}</p>
+            <p>Name: {f.displayName},</p>
+            <p> {f.displayName}</p>
             <p>
               {' '}
               {f.city}, {f.country}
@@ -108,56 +106,9 @@ const FacultyProfile = ({ history, facultySelector }) => {
         </div>
         <div className={FacultyProfileCss.right}>
           <div className={FacultyProfileCss.header}>
-            <h2>{f.name}</h2>
-            <div className={FacultyProfileCss.desg}>
-              {f.designation} in {f.university}
-            </div>
+            <h2>{f.type}</h2>
+            <div className={FacultyProfileCss.desg}>{f.details}</div>
             {/* <div className={FacultyProfileCss.deg}>{f.institute}</div> */}
-          </div>
-          <div className={FacultyProfileCss.row}>
-            <h3>Qualification </h3>
-            <hr className={FacultyProfileCss.hr} />
-            <table>
-              <thead>
-                <tr>
-                  <th>Degree Title</th>
-                  <th>institute</th>
-                  <th>Year Of Passing</th>
-                </tr>
-              </thead>
-              {f.qualification.map((qual, i) => (
-                <tbody key={i}>
-                  <tr>
-                    <td>{qual.degree_tittle}</td>
-                    <td>{qual.institute_attended}</td>
-                    <td>{qual.year_of_passing}</td>
-                  </tr>
-                </tbody>
-              ))}
-            </table>
-          </div>
-          <div className={FacultyProfileCss.row}>
-            <h3>Courses in proffessional</h3>
-            <hr className={FacultyProfileCss.hr} />
-            <div className={FacultyProfileCss.tags}>
-              {f.courses.map((course, j) => (
-                <span key={j}>{course}</span>
-              ))}
-            </div>
-          </div>
-          <div className={FacultyProfileCss.row}>
-            <h3>Area of Experties</h3>
-            <hr className={FacultyProfileCss.hr} />
-            <div className={FacultyProfileCss.tags}>
-              {f.experties.map((course, j) => (
-                <span key={j}>{course}</span>
-              ))}
-            </div>
-          </div>
-          <div className={FacultyProfileCss.row}>
-            <h3>RESEARCH INTERESTS</h3>
-            <hr className={FacultyProfileCss.hr} />
-            <p>{f.interests}</p>
           </div>
 
           {/* <div className={FacultyProfileCss.row}>

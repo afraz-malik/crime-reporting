@@ -52,6 +52,10 @@ const Navbar = () => {
           </li>
           <li>
             {' '}
+            <Link to="/campaigns">Campaigns </Link>
+          </li>
+          <li>
+            {' '}
             <Link to="/register">Report Crime </Link>
           </li>
           {!currentUser ? (
@@ -102,6 +106,10 @@ const Navbar = () => {
           <li>
             {' '}
             <Link to="/about">About-Us </Link>
+          </li>
+          <li>
+            {' '}
+            <Link to="/campaigns">Campaigns </Link>
           </li>
           <li>
             {' '}

@@ -7,16 +7,20 @@ import {
   Success,
   Loading,
   facultySelectorList,
+  UsersSelector,
 } from '../../redux/data/data.selectors'
 import {
   clearSuccess,
   gettingFacultiesStart,
 } from '../../redux/data/data.actions'
 import { Spinner } from '../spinner/spinner'
+import { currentUserSelector } from '../../redux/user/user.selector.js'
 const mapStateToProps = (state) => ({
   faculty: facultySelectorList(state),
   success: Success(state),
+  users: UsersSelector(state),
   loading: Loading(state),
+  currentUser: currentUserSelector(state),
 })
 
 const mapDisptachToProps = (dispatch) => ({
@@ -60,7 +64,7 @@ class DataBox extends React.Component {
     }
     const { faculty } = this.props
     const { searchValue, pageNumber } = this.state
-
+    console.log(faculty)
     const filteredData = faculty.filter((data) => {
       return data.type.toLowerCase().includes(searchValue.toLowerCase())
       // data.lname.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -76,6 +80,7 @@ class DataBox extends React.Component {
     }
     const currentPageData = this.paginate(filteredData, 5, pageNumber)
     console.log(currentPageData)
+
     return (
       <div className={DataBoxCss.database}>
         <div className={DataBoxCss.top}>
@@ -91,7 +96,7 @@ class DataBox extends React.Component {
             <img alt="" src="images/search2.svg" />
             <input
               type="text"
-              placeholder="Search for name, university, email..."
+              placeholder="Search......"
               onChange={this.handleChange}
               value={searchValue}
             />
@@ -115,12 +120,25 @@ class DataBox extends React.Component {
                 <th>CRIME DETAILS</th>
                 <th>LOCATION</th>
                 <th>EVIDENCE</th>
-                <th>REPORTER</th>
+                <th>Updates</th>
+                {this.props.currentUser.type === 'officer' && <th>REPORTER</th>}
+                {this.props.currentUser?.type === 'sofficer' && (
+                  <th>Assign Investigator</th>
+                )}
+                {this.props.currentUser?.type === 'sofficer' && (
+                  <th>Create News</th>
+                )}
+                {this.props.currentUser?.type === 'sofficer' && <th>Status</th>}{' '}
               </tr>
             </thead>
             <tbody>
               {currentPageData.map((data, j) => (
-                <DataListGen key={j} index={j} data={data} />
+                <DataListGen
+                  key={j}
+                  index={j}
+                  data={data}
+                  users={this.props.users}
+                />
               ))}
             </tbody>
           </table>
